@@ -114,8 +114,8 @@
 		let abortButton = document.querySelector('#abort');
 
 		let filesList = document.querySelector('#files-list');
-	  let logView = document.querySelector('#log');
-	  let logLines = document.querySelector('#log-lines');
+		let logView = document.querySelector('#log');
+		let logLines = document.querySelector('#log-lines');
 		let infoBlurb = document.querySelector('#words');
 
 		let uploadControls = document.querySelector('#upload-controls');
@@ -225,6 +225,10 @@
 
 			currentRequest.responseType = 'json';
 
+			currentRequest.onerror = function(e) {
+				alert("Connection error during upload. Please try again.");
+			};
+
 			// Send POST request to the server side script
 			currentRequest.open('post', url + 'upload');
 
@@ -238,15 +242,15 @@
 			if (progressing) {
 				if (!logView.classList.contains("display-block")) logView.classList.add("display-block");
 				if (!progressControls.classList.contains("display-block")) progressControls.classList.add("display-block");
-		  	if (uploadControls.classList.contains("display-block")) uploadControls.classList.remove("display-block");
-		  	if (infoBlurb.classList.contains("display-block")) infoBlurb.classList.remove("display-block");
+				if (uploadControls.classList.contains("display-block")) uploadControls.classList.remove("display-block");
+				if (infoBlurb.classList.contains("display-block")) infoBlurb.classList.remove("display-block");
 				resetLog();
 			} else {
 				if (logView.classList.contains("display-block")) logView.classList.remove("display-block");
 				if (progressControls.classList.contains("display-block")) progressControls.classList.remove("display-block");
 				if (!uploadControls.classList.contains("display-block")) uploadControls.classList.add("display-block");
 				if (filesList.classList.contains("display-block")) filesList.classList.remove("display-block");
-		  	if (!infoBlurb.classList.contains("display-block")) infoBlurb.classList.add("display-block");
+				if (!infoBlurb.classList.contains("display-block")) infoBlurb.classList.add("display-block");
 				history.pushState(null, document.title, '#');
 			}
 		}
