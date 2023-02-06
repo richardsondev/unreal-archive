@@ -227,6 +227,7 @@
 
 			currentRequest.onerror = function(e) {
 				alert("Connection error during upload. Please try again.");
+				abortButton.innerText = "Retry upload";
 			};
 
 			// Send POST request to the server side script
